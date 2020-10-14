@@ -1,0 +1,4 @@
+com\piltover\gateway\config\RedisConfig.class
+com\piltover\gateway\GatewayApp.class
+com\piltover\gateway\filter\CheckTokenFilter.class
+com\piltover\gateway\config\GlobalCorsConfig.class

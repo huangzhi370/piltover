@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.piltover.user.dao.MallUserDetailMapper">
+  <resultMap id="BaseResultMap" type="com.piltover.user.entity.MallUserDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_nick_name" jdbcType="VARCHAR" property="userNickName" />
+    <result column="user_height" jdbcType="VARCHAR" property="userHeight" />
+    <result column="user_weight" jdbcType="VARCHAR" property="userWeight" />
+    <result column="all_name" jdbcType="VARCHAR" property="allName" />
+    <result column="weapon" jdbcType="VARCHAR" property="weapon" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="skill" jdbcType="VARCHAR" property="skill" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="head_portrait" jdbcType="VARCHAR" property="headPortrait" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_name, user_nick_name, user_height, user_weight, all_name, weapon, position, 
+    skill, email, head_portrait
+  </sql>
+  <select id="selectByExample" parameterType="com.piltover.user.entity.MallUserDetailExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from mall_user_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mall_user_detail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from mall_user_detail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.piltover.user.entity.MallUserDetailExample">
+    delete from mall_user_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.piltover.user.entity.MallUserDetail">
+    insert into mall_user_detail (id, user_name, user_nick_name, 
+      user_height, user_weight, all_name, 
+      weapon, position, skill, 
+      email, head_portrait)
+    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userNickName,jdbcType=VARCHAR}, 
+      #{userHeight,jdbcType=VARCHAR}, #{userWeight,jdbcType=VARCHAR}, #{allName,jdbcType=VARCHAR}, 
+      #{weapon,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{skill,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{headPortrait,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.piltover.user.entity.MallUserDetail">
+    insert into mall_user_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userNickName != null">
+        user_nick_name,
+      </if>
+      <if test="userHeight != null">
+        user_height,
+      </if>
+      <if test="userWeight != null">
+        user_weight,
+      </if>
+      <if test="allName != null">
+        all_name,
+      </if>
+      <if test="weapon != null">
+        weapon,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="skill != null">
+        skill,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="headPortrait != null">
+        head_portrait,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeight != null">
+        #{userHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="userWeight != null">
+        #{userWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="allName != null">
+        #{allName,jdbcType=VARCHAR},
+      </if>
+      <if test="weapon != null">
+        #{weapon,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+        #{headPortrait,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.piltover.user.entity.MallUserDetailExample" resultType="java.lang.Long">
+    select count(*) from mall_user_detail
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update mall_user_detail
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNickName != null">
+        user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userHeight != null">
+        user_height = #{record.userHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userWeight != null">
+        user_weight = #{record.userWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.allName != null">
+        all_name = #{record.allName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.weapon != null">
+        weapon = #{record.weapon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skill != null">
+        skill = #{record.skill,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headPortrait != null">
+        head_portrait = #{record.headPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update mall_user_detail
+    set id = #{record.id,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_nick_name = #{record.userNickName,jdbcType=VARCHAR},
+      user_height = #{record.userHeight,jdbcType=VARCHAR},
+      user_weight = #{record.userWeight,jdbcType=VARCHAR},
+      all_name = #{record.allName,jdbcType=VARCHAR},
+      weapon = #{record.weapon,jdbcType=VARCHAR},
+      position = #{record.position,jdbcType=VARCHAR},
+      skill = #{record.skill,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      head_portrait = #{record.headPortrait,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.piltover.user.entity.MallUserDetail">
+    update mall_user_detail
+    <set>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userNickName != null">
+        user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="userHeight != null">
+        user_height = #{userHeight,jdbcType=VARCHAR},
+      </if>
+      <if test="userWeight != null">
+        user_weight = #{userWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="allName != null">
+        all_name = #{allName,jdbcType=VARCHAR},
+      </if>
+      <if test="weapon != null">
+        weapon = #{weapon,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="skill != null">
+        skill = #{skill,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="headPortrait != null">
+        head_portrait = #{headPortrait,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.piltover.user.entity.MallUserDetail">
+    update mall_user_detail
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_nick_name = #{userNickName,jdbcType=VARCHAR},
+      user_height = #{userHeight,jdbcType=VARCHAR},
+      user_weight = #{userWeight,jdbcType=VARCHAR},
+      all_name = #{allName,jdbcType=VARCHAR},
+      weapon = #{weapon,jdbcType=VARCHAR},
+      position = #{position,jdbcType=VARCHAR},
+      skill = #{skill,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      head_portrait = #{headPortrait,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
